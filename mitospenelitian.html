@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Mitos Kesalahan Penelitian Computing - Dr. Romi Satria Wahono</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        },
+                        accent: {
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(229, 231, 235, 0.8);
+        }
+        .dark .glass-card {
+            background: rgba(17, 24, 39, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(55, 65, 81, 0.5);
+        }
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 font-sans transition-colors duration-300 min-h-screen flex flex-col">
+
+    <!-- Top Navigation -->
+    <nav class="sticky top-0 z-50 glass-card border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-accent-600 flex items-center justify-center text-white shadow-lg shadow-brand-500/20">
+                        <i class="fa-solid fa-graduation-cap text-lg"></i>
+                    </div>
+                    <div>
+                        <span class="font-heading font-bold text-lg leading-none block bg-gradient-to-r from-brand-600 to-accent-600 bg-clip-text text-transparent">Research Hub</span>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Computing Science Guide</span>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#myths-grid" class="text-sm font-semibold hover:text-brand-600 dark:hover:text-brand-400 transition-colors">10 Mitos</a>
+                    <a href="#matrix-section" class="text-sm font-semibold hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Matriks Perbandingan</a>
+                    <a href="#quiz-section" class="text-sm font-semibold hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Kuis Pemahaman</a>
+                    <a href="#video-section" class="text-sm font-semibold hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Video Sumber</a>
+                </div>
+
+                <!-- Dark Mode & Actions -->
+                <div class="flex items-center space-x-3">
+                    <button id="darkModeToggle" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" title="Toggle Theme">
+                        <i class="fa-solid fa-moon dark:hidden"></i>
+                        <i class="fa-solid fa-sun hidden dark:block"></i>
+                    </button>
+                    <button onclick="copySummary()" class="hidden sm:inline-flex items-center space-x-2 bg-brand-600 hover:bg-brand-700 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-all shadow-md shadow-brand-500/20 active:scale-95">
+                        <i class="fa-solid fa-copy"></i>
+                        <span>Salin Ringkasan</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative overflow-hidden py-12 md:py-16 bg-gradient-to-b from-brand-50/50 via-transparent to-transparent dark:from-slate-900/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Text -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-brand-100 dark:bg-brand-900/50 border border-brand-200 dark:border-brand-800 text-brand-700 dark:text-brand-300 text-xs font-semibold">
+                        <i class="fa-solid fa-award"></i>
+                        <span>Bedah Metodologi Penelitian Computing</span>
+                    </div>
+                    
+                    <h1 class="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-tight">
+                        10 Mitos Kesalahan <br class="hidden sm:block"/>
+                        <span class="bg-gradient-to-r from-brand-600 via-accent-500 to-indigo-600 bg-clip-text text-transparent">Penelitian Computing</span>
+                    </h1>
+                    
+                    <p class="text-slate-600 dark:text-slate-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Diringkas dari materi fundamental <strong class="text-slate-900 dark:text-white">Dr. Romi Satria Wahono</strong>. Solusi komprehensif untuk menghilangkan kegelisahan mahasiswa dan dosen dalam menyusun Skripsi, Tesis, Disertasi, serta Publikasi Jurnal.
+                    </p>
+
+                    <!-- Assessment Criteria Badges -->
+                    <div class="pt-2 flex flex-wrap justify-center lg:justify-start gap-3">
+                        <span class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 text-xs font-medium">
+                            <i class="fa-solid fa-circle-check text-emerald-500"></i>
+                            <span>1. Ketepatan & Kelengkapan Isi</span>
+                        </span>
+                        <span class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-lg bg-purple-50 dark:bg-purple-950/50 border border-purple-200 dark:border-purple-800 text-purple-700 dark:text-purple-300 text-xs font-medium">
+                            <i class="fa-solid fa-wand-magic-sparkles text-purple-500"></i>
+                            <span>2. Kreativitas Visual & Interaktif</span>
+                        </span>
+                        <span class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-lg bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-xs font-medium">
+                            <i class="fa-solid fa-fingerprint text-blue-500"></i>
+                            <span>3. Orisinalitas Penyajian</span>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Video Card Embed -->
+                <div class="lg:col-span-5" id="video-section">
+                    <div class="rounded-2xl overflow-hidden glass-card p-2 shadow-2xl border border-slate-200/80 dark:border-slate-800">
+                        <div class="relative aspect-video rounded-xl overflow-hidden bg-slate-900 group">
+                            <iframe 
+                                class="w-full h-full border-0" 
+                                src="https://www.youtube-nocookie.com/embed/4WFuNc1Pjts?rel=0" 
+                                title="10 Mitos Kesalahan Penelitian Computing" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="p-3 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 font-medium">
+                            <span class="flex items-center space-x-1.5">
+                                <i class="fa-brands fa-youtube text-red-500 text-sm"></i>
+                                <span>Dr. Romi Satria Wahono</span>
+                            </span>
+                            <span>Durasi: 1 jam 7 menit</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <section class="sticky top-16 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-y border-slate-200 dark:border-slate-800 py-4 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                
+                <!-- Search & Category Filters -->
+                <div class="w-full md:w-auto flex flex-col sm:flex-row items-center gap-3">
+                    <div class="relative w-full sm:w-64">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                        <input type="text" id="searchInput" placeholder="Cari mitos atau kata kunci..." class="w-full pl-9 pr-4 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    </div>
+
+                    <div class="flex items-center space-x-1 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0 scrollbar-none">
+                        <button onclick="filterCategory('all')" class="cat-btn active px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-600 text-white transition-all whitespace-nowrap">Semua (10)</button>
+                        <button onclick="filterCategory('Software')" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all whitespace-nowrap">Software</button>
+                        <button onclick="filterCategory('Metodologi')" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all whitespace-nowrap">Metodologi</button>
+                        <button onclick="filterCategory('Literatur')" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all whitespace-nowrap">Literatur</button>
+                        <button onclick="filterCategory('Publikasi')" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all whitespace-nowrap">Publikasi</button>
+                    </div>
+                </div>
+
+                <!-- Progress Tracker -->
+                <div class="w-full md:w-64 flex items-center space-x-3">
+                    <div class="flex-1 bg-slate-200 dark:bg-slate-800 rounded-full h-2.5 overflow-hidden">
+                        <div id="readingProgress" class="bg-gradient-to-r from-brand-500 to-accent-500 h-2.5 rounded-full transition-all duration-300 w-0"></div>
+                    </div>
+                    <span id="progressText" class="text-xs font-bold text-slate-600 dark:text-slate-400 min-w-[3rem] text-right">0 / 10</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
+        
+        <div class="flex items-center justify-between mb-8" id="myths-grid">
+            <div>
+                <h2 class="font-heading font-bold text-2xl sm:text-3xl text-slate-900 dark:text-white">Kartu Interaktif 10 Mitos</h2>
+                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Klik kartu untuk membalik antara <span class="text-red-500 font-semibold">Mitos (Kesalahan)</span> dan <span class="text-emerald-500 font-semibold">Realita (Fakta Solusi)</span>.</p>
+            </div>
+            <button onclick="flipAllCards()" class="hidden sm:inline-flex items-center space-x-2 text-xs font-semibold text-brand-600 dark:text-brand-400 hover:underline">
+                <i class="fa-solid fa-rotate"></i>
+                <span>Balik Semua Kartu</span>
+            </button>
+        </div>
+
+        <!-- Cards Grid Container -->
+        <div id="cardsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- JS dynamic content here -->
+        </div>
+
+        <section id="matrix-section" class="mt-20 pt-10 border-t border-slate-200 dark:border-slate-800">
+            <div class="mb-8 text-center max-w-3xl mx-auto">
+                <span class="px-3 py-1 rounded-full bg-accent-100 dark:bg-accent-950/50 text-accent-600 dark:text-accent-400 text-xs font-semibold">Quick Cheat Sheet</span>
+                <h2 class="font-heading font-bold text-2xl sm:text-3xl text-slate-900 dark:text-white mt-2">Matriks Perbandingan Ringkas</h2>
+                <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Panduan cepat membedakan paradigma lama yang keliru dengan pendekatan ilmiah yang benar.</p>
+            </div>
+
+            <div class="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 glass-card shadow-lg">
+                <table class="w-full text-left border-collapse min-w-[700px]">
+                    <thead>
+                        <tr class="bg-slate-100/70 dark:bg-slate-900/70 text-slate-700 dark:text-slate-300 text-xs uppercase tracking-wider font-bold border-b border-slate-200 dark:border-slate-800">
+                            <th class="p-4 w-12 text-center">No</th>
+                            <th class="p-4 w-1/4">Aspek Mitos</th>
+                            <th class="p-4 text-red-600 dark:text-red-400">Pemahaman Keliru (Mitos)</th>
+                            <th class="p-4 text-emerald-600 dark:text-emerald-400">Pendekatan Benar (Fakta Ilmiah)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="matrixTableBody" class="divide-y divide-slate-200 dark:divide-slate-800 text-sm">
+                        <!-- JS Dynamic Table Rows -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="mt-20 pt-10 border-t border-slate-200 dark:border-slate-800">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-8">
+                    <span class="px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 text-xs font-semibold">Uji Pemahaman</span>
+                    <h2 class="font-heading font-bold text-2xl sm:text-3xl text-slate-900 dark:text-white mt-2">Kuis Interaktif Metodologi</h2>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Uji pemahamanmu tentang 10 Mitos Penelitian Computing untuk memastikan siap menyusun karya ilmiah.</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-xl relative overflow-hidden">
+                    <div id="quizContainer">
+                        <!-- Quiz Header Info -->
+                        <div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-200 dark:border-slate-800">
+                            <span id="quizQuestionNum" class="text-xs font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400">Pertanyaan 1 dari 5</span>
+                            <span id="quizScore" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Skor: 0</span>
+                        </div>
+
+                        <!-- Question Text -->
+                        <h3 id="quizQuestion" class="font-heading font-semibold text-lg sm:text-xl text-slate-900 dark:text-white mb-6">
+                            Loading pertanyaan...
+                        </h3>
+
+                        <!-- Options Container -->
+                        <div id="quizOptions" class="space-y-3">
+                            <!-- Options injected dynamically -->
+                        </div>
+
+                        <!-- Feedback Message -->
+                        <div id="quizFeedback" class="hidden mt-6 p-4 rounded-xl text-xs sm:text-sm font-medium"></div>
+
+                        <!-- Next Question Button -->
+                        <div class="mt-6 flex justify-end">
+                            <button id="nextQuizBtn" onclick="nextQuestion()" class="hidden bg-brand-600 hover:bg-brand-700 text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition-all shadow-md shadow-brand-500/20">
+                                Pertanyaan Selanjutnya <i class="fa-solid fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Result Modal/View -->
+                    <div id="quizResult" class="hidden text-center py-8">
+                        <div class="w-20 h-20 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-3xl mx-auto mb-4">
+                            <i class="fa-solid fa-trophy"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-2xl text-slate-900 dark:text-white">Kuis Selesai!</h3>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm mt-2">Skor Akhir Kamu:</p>
+                        <div id="finalScore" class="text-5xl font-extrabold font-heading text-brand-600 dark:text-brand-400 my-4">100</div>
+                        <p id="resultMessage" class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-md mx-auto mb-6">Luar biasa! Kamu sudah benar-benar memahami paradigma metodologi penelitian computing yang tepat.</p>
+                        <button onclick="restartQuiz()" class="bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 py-2.5 rounded-xl text-sm transition-all shadow-md shadow-brand-500/20">
+                            Ulangi Kuis
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="mt-20 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
+            <div>
+                <p class="font-semibold text-slate-700 dark:text-slate-300">Tugas Rangkuman Metodologi Penelitian Computing</p>
+                <p class="mt-0.5">Berdasarkan materi video Dr. Romi Satria Wahono, M.Eng., Ph.D.</p>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span class="inline-flex items-center space-x-1">
+                    <i class="fa-solid fa-code text-brand-500"></i>
+                    <span>Interactive HTML Web App</span>
+                </span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-4 py-3 rounded-xl shadow-2xl flex items-center space-x-3 text-xs font-semibold">
+        <i class="fa-solid fa-circle-check text-emerald-400 dark:text-emerald-600 text-base"></i>
+        <span id="toastMsg">Teks berhasil disalin ke clipboard!</span>
+    </div>
+
+    <script>
+        // 10 Myths Data Array
+        const mythsData = [
+            {
+                id: 1,
+                title: "Harus Membuat Software",
+                category: "Software",
+                timestamp: "00:03:15",
+                myth: "Penelitian Computing Wajib Membuat / Mengembangkan Software Aplikasi Baru.",
+                reality: "Software hanyalah testbed (alat bantu pengujian eksperimen). Penelitian ilmiah fokus pada pengujian efektivitas algoritma atau metode, bukan sekadar koding aplikasi.",
+                details: "Penelitian lahir dari masalah penelitian (research problem). Koding software hanya dilakukan jika metode/algoritma yang diusulkan membutuhkan sarana uji coba (testbed).",
+                icon: "fa-code"
+            },
+            {
+                id: 2,
+                title: "Kontribusi ke Masyarakat",
+                category: "Metodologi",
+                timestamp: "00:13:15",
+                myth: "Tujuan Utama Penelitian Adalah Memberikan Manfaat Direct ke Masyarakat.",
+                reality: "Tujuan utama penelitian ilmiah adalah Contribution to Knowledge (kontribusi pada pengetahuan/teori/metode). Manfaat ke masyarakat adalah dampak sekunder.",
+                details: "Ukuran keberhasilan (objective) riset ilmiah adalah memecahkan celah pengetahuan (research gap), memperbaiki, atau merevisi metode yang sudah ada sebelumnya.",
+                icon: "fa-users"
+            },
+            {
+                id: 3,
+                title: "Metode SDLC = Metode Penelitian",
+                category: "Metodologi",
+                timestamp: "00:34:52",
+                myth: "Waterfall, Agile, Scrum, atau RAD Adalah Metode Penelitian Ilmu Komputer.",
+                reality: "Waterfall, Agile, dan RAD adalah Software Development Life Cycle (SDLC) / Metodologi Pengembangan Software. Bukan metode penelitian ilmiah.",
+                details: "Metode penelitian ilmiah yang valid contohnya: Eksperimen, Action Research, Case Study, atau Survei. Jangan mencampuradukkan metode riset dengan metode koding.",
+                icon: "fa-diagram-project"
+            },
+            {
+                id: 4,
+                title: "Masalah di Lapangan / Masalah Kehidupan",
+                category: "Metodologi",
+                timestamp: "00:43:00",
+                myth: "Masalah Penelitian Ditarik dari Masalah yang Muncul di Lapangan/Masyarakat.",
+                reality: "Masalah di masyarakat adalah 'Masalah Kehidupan'. Masalah Penelitian (Research Problem) selalu ditarik dari literatur / paper ilmiah.",
+                details: "Research problem diperoleh dengan membaca paper ilmiah terkini dan menemukan kelemahan, ketidakakuratan, atau keterbatasan algoritma terdahulu.",
+                icon: "fa-triangle-exclamation"
+            },
+            {
+                id: 5,
+                title: "Bab 2 Berisi Teori Dasar Buku",
+                category: "Literatur",
+                timestamp: "00:48:49",
+                myth: "Bab 2 Studi Literatur Berisi Definisi Dasar Kamus & Pemrograman (Contoh: 'PHP Adalah...').",
+                reality: "Studi literatur bertujuan memetakan State-of-the-Art penelitian terkini untuk menemukan Research Gap dari puluhan paper bereputasi.",
+                details: "Bab 2 bukan tempat menempelkan definisi umum dari buku teks. Bab 2 adalah analisis komparatif dari paper-paper penelitian terkini (3-5 tahun terakhir).",
+                icon: "fa-book-open"
+            },
+            {
+                id: 6,
+                title: "Banyak Membaca Bikin Pusing",
+                category: "Literatur",
+                timestamp: "00:54:10",
+                myth: "Semakin Banyak Membaca Literatur / Paper Ilmiah, Peneliti Akan Semakin Pusing.",
+                reality: "Pusing terjadi bukan karena terlalu banyak membaca, melainkan karena jumlah paper yang dibaca BELUM CUKUP atau membacanya tidak fokus.",
+                details: "Ketika jumlah pembacaan paper sudah memenuhi batas kecukupan pada satu topik spesifik, peta jalan penelitian akan terlihat sangat terang dan jelas.",
+                icon: "fa-brain"
+            },
+            {
+                id: 7,
+                title: "Aplikatif = Mudah Masuk Jurnal",
+                category: "Publikasi",
+                timestamp: "00:56:44",
+                myth: "Semakin Aplikatif Penelitian (Diuji di Banyak Tempat Berbeda), Semakin Mudah Masuk Jurnal Bereputasi.",
+                reality: "Jurnal bereputasi (Scopus/WoS) mengutamakan kontribusi perbaikan metode/algoritma (Method Improvement), bukan sekadar ganti tempat penerapan.",
+                details: "Menggunakan algoritma orang lain lalu menerapkannya di Instansi A, B, atau C tanpa ada modifikasi algoritma tidak memiliki nilai kontribusi ilmiah baru.",
+                icon: "fa-newspaper"
+            },
+            {
+                id: 8,
+                title: "Harus Berlayar Skala Besar",
+                category: "Metodologi",
+                timestamp: "01:00:24",
+                myth: "Penelitian Ilmiah yang Baik Skalanya Harus Sangat Besar & Menggabungkan Banyak Teknologi.",
+                reality: "Penelitian berkualitas justru berfokus pada topik yang sempit, spesifik, dan mendalam (Small Scope, High Impact).",
+                details: "Lebih baik menyelesaikan satu masalah spesifik secara mendalam pada algoritma tertentu daripada menggabungkan banyak bidang secara dangkal.",
+                icon: "fa-microscope"
+            },
+            {
+                id: 9,
+                title: "Sitasi Boleh Copas Paragraf",
+                category: "Publikasi",
+                timestamp: "01:03:25",
+                myth: "Mengambil Paragraf Orang Lain Secara Utuh Diperbolehkan Asal Mencantumkan Sumbernya.",
+                reality: "Mengambil kalimat/paragraf secara verbatim (utuh) tetap dikategorikan sebagai Plagiarisme. Cara yang benar adalah Paraphrasing.",
+                details: "Sitasi ilmiah wajib menggunakan gaya bahasa dan struktur kalimat sendiri (parafrase) tanpa mengubah makna asli, lalu mencantumkan rujukan.",
+                icon: "fa-quote-left"
+            },
+            {
+                id: 10,
+                title: "1 Hasil Untuk Banyak Paper",
+                category: "Publikasi",
+                timestamp: "01:06:10",
+                myth: "Satu Hasil Eksperimen / Dataset Boleh Dipublikasikan ke Beberapa Jurnal / Konferensi Berbeda.",
+                reality: "Mempublikasikan hasil kontribusi ilmiah yang sama ke beberapa outlet media adalah pelanggaran etika (Duplicate Publication / Self-Plagiarism).",
+                details: "Prinsip dasar etika publikasi ilmiah adalah: 1 Kontribusi Ilmiah Baru = 1 Publikasi Paper.",
+                icon: "fa-copy"
+            }
+        ];
+
+        // Quiz Questions Data
+        const quizData = [
+            {
+                question: "Manakah di bawah ini yang tergolong Metodologi Penelitian Ilmiah, BUKAN metodologi pengembangan software?",
+                options: [
+                    "Waterfall & RAD",
+                    "Agile & Scrum",
+                    "Eksperimen & Action Research",
+                    "Extreme Programming (XP)"
+                ],
+                correct: 2,
+                explanation: "Waterfall, Agile, RAD, dan XP adalah SDLC (pengembangan software). Metode penelitian ilmiah yang benar contohnya adalah Eksperimen, Action Research, Case Study, atau Survei."
+            },
+            {
+                question: "Dari manakah seharusnya Masalah Penelitian (Research Problem) ditarik dalam riset computing?",
+                options: [
+                    "Keluhat masyarakat tentang sistem manual",
+                    "Paper / Literatur Ilmiah (Kelemahan metode sebelumnya)",
+                    "Keinginan membuat aplikasi mobile untuk toko teman",
+                    "Berita di media sosial tentang kemacetan jalan"
+                ],
+                correct: 1,
+                explanation: "Masalah di masyarakat adalah masalah kehidupan. Masalah penelitian (Research Problem) selalu ditarik dari literatur ilmiah berupa research gap/kelemahan metode terdahulu."
+            },
+            {
+                question: "Mengapa mengubah tempat penerapan algoritma (misal: Algoritma C4.5 di Instansi A lalu diganti Instansi B) sulit menembus jurnal Scopus bereputasi?",
+                options: [
+                    "Karena instansinya terlalu kecil",
+                    "Karena tidak ada kontribusi perbaikan pada metode/algoritmanya (No Method Improvement)",
+                    "Karena instansinya kurang terkenal",
+                    "Karena koding aplikasinya kurang rumit"
+                ],
+                correct: 1,
+                explanation: "Jurnal bereputasi tinggi mengutamakan Contribution to Knowledge berupa perbaikan atau pengembangan metode/algoritma, bukan sekadar objek penerapannya."
+            },
+            {
+                question: "Apa fungsi utama Bab 2 (Studi Literatur) yang benar menurut Dr. Romi Satria Wahono?",
+                options: [
+                    "Menyalin definisi dasar seperti 'PHP adalah...', 'Java adalah...'",
+                    "Memetakan State-of-the-Art & menemukan Research Gap dari paper ilmiah terkini",
+                    "Mengisi ketebalan halaman skripsi/tesis agar terlihat banyak",
+                    "Menuliskan petunjuk koding dan instalasi software"
+                ],
+                correct: 1,
+                explanation: "Bab 2 berfungsi memetakan perkembangan penelitian terkini (State-of-the-Art) untuk membuktikan adanyaResearch Gap yang akan kita selesaikan."
+            },
+            {
+                question: "Bagaimana cara melakukan sitasi yang benar dari karya orang lain agar tidak tergolong plagiarisme?",
+                options: [
+                    "Copy-paste 1 paragraf penuh lalu beri nomor rujukan di ujungnya",
+                    "Melakukan Parafrase (menulis ulang ide dengan kalimat sendiri) dan mencantumkan sumber",
+                    "Menerjemahkan bahasa Inggris ke Indonesia secara mentah tanpa ubah struktur",
+                    "Mengubah satu kata saja dalam satu paragraf"
+                ],
+                correct: 1,
+                explanation: "Mengutip utuh (verbatim) tetap dianggap plagiarisme. Cara yang sah adalah melakukan parafrase ide dengan kata-kata sendiri serta tetap mencantumkan sumber sitasi."
+            }
+        ];
+
+        // State Tracking
+        const readCards = new Set();
+        let currentQuizIndex = 0;
+        let quizScore = 0;
+        let selectedOption = null;
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCards(mythsData);
+            renderMatrix();
+            loadQuizQuestion();
+            setupDarkMode();
+            setupSearch();
+        });
+
+        function renderCards(cards) {
+            const container = document.getElementById('cardsGrid');
+            container.innerHTML = '';
+
+            if (cards.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full py-12 text-center text-slate-400">
+                        <i class="fa-solid fa-folder-open text-4xl mb-3"></i>
+                        <p class="text-sm font-semibold">Tidak ada mitos yang cocok dengan pencarianmu.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            cards.forEach(item => {
+                const cardEl = document.createElement('div');
+                cardEl.className = 'card-item perspective-1000 h-[360px] cursor-pointer group';
+                cardEl.setAttribute('data-id', item.id);
+                cardEl.onclick = () => flipCard(cardEl, item.id);
+
+                cardEl.innerHTML = `
+                    <div class="card-inner relative w-full h-full duration-500 transform-style-3d shadow-md hover:shadow-xl rounded-2xl border border-slate-200 dark:border-slate-800">
+                        
+                        <!-- Front Face (Myth) -->
+                        <div class="card-front absolute inset-0 w-full h-full rounded-2xl glass-card p-6 flex flex-col justify-between backface-hidden border-t-4 border-t-red-500">
+                            <div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="px-2.5 py-1 rounded-md bg-red-100 dark:bg-red-950/60 text-red-600 dark:text-red-400 text-xs font-bold uppercase tracking-wider">
+                                        Mitos #${item.id}
+                                    </span>
+                                    <span class="text-xs text-slate-400 font-medium flex items-center space-x-1">
+                                        <i class="fa-regular fa-clock"></i>
+                                        <span>${item.timestamp}</span>
+                                    </span>
+                                </div>
+                                <div class="w-12 h-12 rounded-xl bg-red-50 dark:bg-red-950/40 text-red-500 flex items-center justify-center text-xl mb-4">
+                                    <i class="fa-solid ${item.icon}"></i>
+                                </div>
+                                <h3 class="font-heading font-bold text-lg text-slate-900 dark:text-white leading-snug">
+                                    "${item.myth}"
+                                </h3>
+                            </div>
+
+                            <div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-400 font-semibold">
+                                <span class="group-hover:text-brand-600 transition-colors">Klik untuk lihat Realita</span>
+                                <i class="fa-solid fa-rotate text-sm group-hover:rotate-180 transition-transform duration-500"></i>
+                            </div>
+                        </div>
+
+                        <!-- Back Face (Reality) -->
+                        <div class="card-back absolute inset-0 w-full h-full rounded-2xl bg-slate-900 text-white p-6 flex flex-col justify-between backface-hidden rotate-y-180 border-t-4 border-t-emerald-500 shadow-2xl">
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider border border-emerald-500/30">
+                                        Realita (Fakta Ilmiah)
+                                    </span>
+                                    <span class="text-xs text-slate-400">${item.category}</span>
+                                </div>
+                                <h4 class="font-heading font-bold text-base text-emerald-300 mb-2 leading-snug">
+                                    ${item.reality}
+                                </h4>
+                                <p class="text-xs text-slate-300 leading-relaxed mt-2">
+                                    ${item.details}
+                                </p>
+                            </div>
+
+                            <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+                                <span class="text-emerald-400 font-semibold"><i class="fa-solid fa-circle-check mr-1"></i> Terverifikasi</span>
+                                <span>Klik untuk balik</span>
+                            </div>
+                        </div>
+
+                    </div>
+                `;
+                container.appendChild(cardEl);
+            });
+        }
+
+        // Flip Card Action
+        function flipCard(cardEl, id) {
+            const inner = cardEl.querySelector('.card-inner');
+            inner.classList.toggle('rotate-y-180');
+
+            // Track reading progress
+            if (!readCards.has(id)) {
+                readCards.add(id);
+                updateProgress();
+            }
+        }
+
+        function flipAllCards() {
+            const cards = document.querySelectorAll('.card-inner');
+            cards.forEach(card => card.classList.toggle('rotate-y-180'));
+        }
+
+        function updateProgress() {
+            const total = mythsData.length;
+            const current = readCards.size;
+            const percentage = (current / total) * 100;
+
+            const progressBar = document.getElementById('readingProgress');
+            const progressText = document.getElementById('progressText');
+
+            progressBar.style.width = `${percentage}%`;
+            progressText.innerText = `${current} / ${total}`;
+
+            if (current === total) {
+                showToast("Selamat! Kamu telah mempelajari seluruh 10 Mitos Penelitian Computing 🎉");
+            }
+        }
+
+        function renderMatrix() {
+            const tbody = document.getElementById('matrixTableBody');
+            tbody.innerHTML = mythsData.map(item => `
+                <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-900/50 transition-colors">
+                    <td class="p-4 text-center font-bold text-slate-400">${item.id}</td>
+                    <td class="p-4 font-semibold text-slate-900 dark:text-slate-200">
+                        ${item.title}
+                        <span class="block text-xs font-normal text-slate-400 mt-0.5">${item.category}</span>
+                    </td>
+                    <td class="p-4 text-slate-600 dark:text-slate-300">
+                        <span class="text-red-500 font-semibold">✕</span> ${item.myth}
+                    </td>
+                    <td class="p-4 text-slate-700 dark:text-slate-200 font-medium">
+                        <span class="text-emerald-500 font-semibold">✓</span> ${item.reality}
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function loadQuizQuestion() {
+            const q = quizData[currentQuizIndex];
+            document.getElementById('quizQuestionNum').innerText = `Pertanyaan ${currentQuizIndex + 1} dari ${quizData.length}`;
+            document.getElementById('quizQuestion').innerText = q.question;
+
+            const optionsContainer = document.getElementById('quizOptions');
+            optionsContainer.innerHTML = '';
+            
+            // Reset state
+            selectedOption = null;
+            document.getElementById('quizFeedback').classList.add('hidden');
+            document.getElementById('nextQuizBtn').classList.add('hidden');
+
+            q.options.forEach((opt, idx) => {
+                const optBtn = document.createElement('button');
+                optBtn.className = 'w-full text-left p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/50 hover:border-brand-500 dark:hover:border-brand-500 transition-all font-medium text-xs sm:text-sm text-slate-700 dark:text-slate-200 flex items-center justify-between group';
+                optBtn.onclick = () => selectQuizOption(idx, optBtn);
+                optBtn.innerHTML = `
+                    <span>${opt}</span>
+                    <div class="w-5 h-5 rounded-full border border-slate-300 dark:border-slate-600 flex items-center justify-center group-hover:border-brand-500">
+                        <div class="w-2.5 h-2.5 rounded-full bg-brand-600 hidden group-hover:block"></div>
+                    </div>
+                `;
+                optionsContainer.appendChild(optBtn);
+            });
+        }
+
+        function selectQuizOption(index, btnElement) {
+            if (selectedOption !== null) return; // Prevent changing after answer
+            selectedOption = index;
+
+            const q = quizData[currentQuizIndex];
+            const feedback = document.getElementById('quizFeedback');
+            const nextBtn = document.getElementById('nextQuizBtn');
+
+            const allButtons = document.querySelectorAll('#quizOptions button');
+            allButtons.forEach(b => b.classList.add('pointer-events-none', 'opacity-60'));
+            btnElement.classList.remove('opacity-60');
+
+            if (index === q.correct) {
+                quizScore += 20;
+                document.getElementById('quizScore').innerText = `Skor: ${quizScore}`;
+                btnElement.classList.add('border-emerald-500', 'bg-emerald-50', 'dark:bg-emerald-950/50', 'text-emerald-700', 'dark:text-emerald-300');
+                feedback.className = 'mt-6 p-4 rounded-xl text-xs sm:text-sm font-medium bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-200 border border-emerald-300 dark:border-emerald-800';
+                feedback.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-500 mr-2"></i><strong>Benar!</strong> ${q.explanation}`;
+            } else {
+                btnElement.classList.add('border-red-500', 'bg-red-50', 'dark:bg-red-950/50', 'text-red-700', 'dark:text-red-300');
+                allButtons[q.correct].classList.remove('opacity-60');
+                allButtons[q.correct].classList.add('border-emerald-500', 'bg-emerald-50', 'dark:bg-emerald-950/50');
+                
+                feedback.className = 'mt-6 p-4 rounded-xl text-xs sm:text-sm font-medium bg-red-100 dark:bg-red-950/60 text-red-800 dark:text-red-200 border border-red-300 dark:border-red-800';
+                feedback.innerHTML = `<i class="fa-solid fa-circle-xmark text-red-500 mr-2"></i><strong>Kurang Tepat.</strong> ${q.explanation}`;
+            }
+
+            feedback.classList.remove('hidden');
+            nextBtn.classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQuizIndex++;
+            if (currentQuizIndex < quizData.length) {
+                loadQuizQuestion();
+            } else {
+                showQuizResult();
+            }
+        }
+
+        function showQuizResult() {
+            document.getElementById('quizContainer').classList.add('hidden');
+            const quizResult = document.getElementById('quizResult');
+            quizResult.classList.remove('hidden');
+
+            document.getElementById('finalScore').innerText = quizScore;
+            const msg = document.getElementById('resultMessage');
+            if (quizScore >= 80) {
+                msg.innerText = "Luar biasa! Pemahaman metodologi penelitian computing kamu sangat mantap. Siap menyusun karya ilmiah bereputasi!";
+            } else if (quizScore >= 60) {
+                msg.innerText = "Bagus! Kamu sudah memahami konsep dasar mitos penelitian, namun disarankan mengulas kembali kartu mitos yang keliru.";
+            } else {
+                msg.innerText = "Jangan berkecil hati! Pelajari kembali kartu interaktif di atas dan tonton video Dr. Romi Satria Wahono untuk memperkuat metodologimu.";
+            }
+        }
+
+        function restartQuiz() {
+            currentQuizIndex = 0;
+            quizScore = 0;
+            document.getElementById('quizScore').innerText = `Skor: 0`;
+            document.getElementById('quizResult').classList.add('hidden');
+            document.getElementById('quizContainer').classList.remove('hidden');
+            loadQuizQuestion();
+        }
+
+        function setupSearch() {
+            const input = document.getElementById('searchInput');
+            input.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                const filtered = mythsData.filter(item => 
+                    item.myth.toLowerCase().includes(query) ||
+                    item.reality.toLowerCase().includes(query) ||
+                    item.category.toLowerCase().includes(query) ||
+                    item.title.toLowerCase().includes(query)
+                );
+                renderCards(filtered);
+            });
+        }
+
+        function filterCategory(cat) {
+            // Button styles toggle
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-600', 'text-white');
+                btn.classList.add('bg-slate-100', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+            });
+            event.target.classList.remove('bg-slate-100', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+            event.target.classList.add('bg-brand-600', 'text-white');
+
+            if (cat === 'all') {
+                renderCards(mythsData);
+            } else {
+                const filtered = mythsData.filter(item => item.category === cat);
+                renderCards(filtered);
+            }
+        }
+
+        // Dark Mode Toggle
+        function setupDarkMode() {
+            const toggle = document.getElementById('darkModeToggle');
+            toggle.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+            });
+        }
+
+        // Copy Summary Text
+        function copySummary() {
+            let summaryText = `RANGKUMAN 10 MITOS PENELITIAN COMPUTING\n(Dr. Romi Satria Wahono)\n\n`;
+            mythsData.forEach(item => {
+                summaryText += `${item.id}. MITOS: ${item.myth}\n   REALITA: ${item.reality}\n\n`;
+            });
+
+            // Standard fallback copy method for iframe restrictions
+            const textBuffer = document.createElement('textarea');
+            textBuffer.value = summaryText;
+            document.body.appendChild(textBuffer);
+            textBuffer.select();
+            document.execCommand('copy');
+            document.body.removeChild(textBuffer);
+
+            showToast("Seluruh 10 Mitos & Realita berhasil disalin ke clipboard!");
+        }
+
+        // Toast Notification System
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
